@@ -99,6 +99,8 @@ body {
     cursor: pointer;
 }
 
+/* menu */
+
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -147,4 +149,48 @@ body {
     width: 30px;
     height: 20px;
     margin-left: 10px;
+}
+
+/* contact */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.contact-box {
+    background-color: #f0f0f0;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.contact-box h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.contact-box p {
+    margin: 10px 0;
+    color: #333;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;
+}
+
+.social-icons a {
+    text-decoration: none;
 }
