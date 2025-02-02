@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Styles - Same as other pages */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Menu Content Styles */
+        .menu-container {
+            padding: 50px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-icon {
+            width: 100px;
+            height: 100px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .menu-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .menu-button {
+            padding: 8px 20px;
+            background-color: #4169E1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #3157d1;
+        }
+
+        /* Auth Buttons - Same as other pages */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .auth-buttons a {
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            border: 1px solid #4169E1;
+            color: #4169E1;
+        }
+
+        .signup-btn {
+            background-color: #4169E1;
+            color: white;
+        }
+
+        .language-flag {
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">TasticQ</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="contact.html">Contact</a>
+            <a href="tracking1.html">Tracking</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="signup-btn">Register</a>
+            <img src="picture/uk-flag.png" alt="Language" class="language-flag">
+        </div>
+    </header>
+
+    <div class="menu-container">
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-icon">🚚</div>
+                <h3 class="menu-title">Standard Delivery</h3>
+                <p class="menu-description">Regular delivery service with standard tracking</p>
+                <button class="menu-button">Select</button>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">⚡</div>
+                <h3 class="menu-title">Express Delivery</h3>
+                <p class="menu-description">Fast delivery with priority handling</p>
+                <button class="menu-button">Select</button>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">🌟</div>
+                <h3 class="menu-title">Premium Service</h3>
+                <p class="menu-description">VIP handling with insurance included</p>
+                <button class="menu-button">Select</button>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">📦</div>
+                <h3 class="menu-title">Bulk Shipping</h3>
+                <p class="menu-description">Economical solution for large volumes</p>
+                <button class="menu-button">Select</button>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">🌍</div>
+                <h3 class="menu-title">International</h3>
+                <p class="menu-description">Worldwide shipping solutions</p>
+                <button class="menu-button">Select</button>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">🎁</div>
+                <h3 class="menu-title">Special Handling</h3>
+                <p class="menu-description">For delicate and valuable items</p>
+                <button class="menu-button">Select</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

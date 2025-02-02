@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Tracking Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Tracking Detail Styles */
+        .tracking-detail-container {
+            padding: 30px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tracking-header {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tracking-number {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .tracking-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            color: #666;
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            transform: translateY(-50%);
+        }
+
+        .timeline-step {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        .step-complete .step-icon {
+            background: #4169E1;
+            border-color: #4169E1;
+        }
+
+        .step-active .step-icon {
+            border-color: #4169E1;
+        }
+
+        .step-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Activity Log */
+        .activity-log {
+            margin-top: 30px;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-time {
+            min-width: 150px;
+            color: #666;
+        }
+
+        .activity-description {
+            color: #333;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-btn,
+        .signup-btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            border: 1px solid #4169E1;
+            color: #4169E1;
+        }
+
+        .signup-btn {
+            background-color: #4169E1;
+            color: white;
+        }
+
+        .language-flag {
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">TasticQ</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="contact.html">Contact</a>
+            <a href="tracking1.html">Tracking</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="signup-btn">Register</a>
+            <img src="picture/uk-flag.png" alt="Language" class="language-flag">
+        </div>
+    </header>
+
+    <div class="tracking-detail-container">
+        <div class="tracking-header">
+            <h2 class="tracking-number">Tracking Number: TQ12345678</h2>
+            <div class="tracking-info">
+                <div>
+                    <strong>Order Date:</strong> 2024-02-20
+                </div>
+                <div>
+                    <strong>Estimated Delivery:</strong> 2024-02-23
+                </div>
+                <div>
+                    <strong>Service Type:</strong> Express Delivery
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline">
+                <div class="timeline-step step-complete">
+                    <div class="step-icon"></div>
+                    <div class="step-label">Order Placed</div>
+                </div>
+                <div class="timeline-step step-complete">
+                    <div class="step-icon"></div>
+                    <div class="step-label">Processing</div>
+                </div>
+                <div class="timeline-step step-active">
+                    <div class="step-icon"></div>
+                    <div class="step-label">In Transit</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-icon"></div>
+                    <div class="step-label">Out for Delivery</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-icon"></div>
+                    <div class="step-label">Delivered</div>
+                </div>
+            </div>
+
+            <div class="activity-log">
+                <div class="activity-item">
+                    <div class="activity-time">2024-02-21 14:30</div>
+                    <div class="activity-description">Package in transit to delivery center</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-time">2024-02-21 09:15</div>
+                    <div class="activity-description">Package has left sorting facility</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-time">2024-02-20 16:45</div>
+                    <div class="activity-description">Order processed and ready for shipment</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-time">2024-02-20 10:30</div>
+                    <div class="activity-description">Order confirmed</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

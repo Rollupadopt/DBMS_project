@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Customer Service Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Customer Service Layout */
+        .customer-service-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Service Status */
+        .service-status {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .status-title {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .refresh-button {
+            padding: 8px 15px;
+            background: #4169E1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .status-card {
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .status-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        .status-operational {
+            background: #28a745;
+        }
+
+        .status-issue {
+            background: #ffc107;
+        }
+
+        .status-down {
+            background: #dc3545;
+        }
+
+        /* Service Metrics */
+        .service-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .metric-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .metric-chart {
+            height: 200px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        /* Incident History */
+        .incident-history {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .incident-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .incident-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .incident-table th,
+        .incident-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .incident-table th {
+            font-weight: 600;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .incident-status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .status-resolved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-investigating {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-btn,
+        .signup-btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            border: 1px solid #4169E1;
+            color: #4169E1;
+        }
+
+        .signup-btn {
+            background-color: #4169E1;
+            color: white;
+        }
+
+        .language-flag {
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">TasticQ</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="contact.html">Contact</a>
+            <a href="tracking1.html">Tracking</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="signup-btn">Register</a>
+            <img src="picture/uk-flag.png" alt="Language" class="language-flag">
+        </div>
+    </header>
+
+    <div class="customer-service-container">
+        <div class="service-status">
+            <div class="status-header">
+                <h2 class="status-title">Service Status</h2>
+                <button class="refresh-button">Refresh Status</button>
+            </div>
+            <div class="status-grid">
+                <div class="status-card">
+                    <div class="status-name">Website</div>
+                    <div class="status-indicator status-operational"></div>
+                    <div class="status-text">Operational</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-name">API</div>
+                    <div class="status-indicator status-operational"></div>
+                    <div class="status-text">Operational</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-name">Database</div>
+                    <div class="status-indicator status-issue"></div>
+                    <div class="status-text">Minor Issues</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-name">Payment System</div>
+                    <div class="status-indicator status-operational"></div>
+                    <div class="status-text">Operational</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-metrics">
+            <div class="metric-card">
+                <h3 class="metric-title">Response Time</h3>
+                <div class="metric-chart">Response Time Chart</div>
+            </div>
+            <div class="metric-card">
+                <h3 class="metric-title">Uptime</h3>
+                <div class="metric-chart">Uptime Chart</div>
+            </div>
+        </div>
+
+        <div class="incident-history">
+            <h3 class="incident-title">Recent Incidents</h3>
+            <table class="incident-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-02-21</td>
+                        <td>Database</td>
+                        <td>Intermittent connection issues</td>
+                        <td><span class="incident-status status-investigating">Investigating</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-02-20</td>
+                        <td>API</td>
+                        <td>Increased latency</td>
+                        <td><span class="incident-status status-resolved">Resolved</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-02-19</td>
+                        <td>Website</td>
+                        <td>Login system maintenance</td>
+                        <td><span class="incident-status status-resolved">Resolved</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 

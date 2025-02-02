@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+        }
+
+        /* Header Styles */
+        .header {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4169E1;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notifications {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #4169E1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Layout */
+        .dashboard-container {
+            display: flex;
+            margin-top: 70px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: white;
+            height: calc(100vh - 70px);
+            position: fixed;
+            padding: 30px 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .nav-item:hover {
+            background: #f0f2f5;
+        }
+
+        .nav-item.active {
+            background: #4169E1;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .card-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Recent Orders */
+        .recent-orders {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .view-all {
+            color: #4169E1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th,
+        .orders-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .orders-table th {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-transit {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-pending {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Add new logout button style */
+        .logout-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            padding: 12px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #e04252;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">TasticQ</div>
+            <div class="user-menu">
+                <div class="notifications">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <span>John Doe</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="dashboard.html" class="nav-item active">Dashboard</a></li>
+                <li><a href="my_orders.html" class="nav-item">My Orders</a></li>
+                <li><a href="tracking1.html" class="nav-item">Track Package</a></li>
+                <li><a href="address_book.html" class="nav-item">Address Book</a></li>
+                <li><a href="settings.html" class="nav-item">Settings</a></li>
+                <li><a href="contact_service.html" class="nav-item">Support</a></li>
+            </ul>
+            <a href="home.html" class="logout-btn">Logout</a>
+        </aside>
+
+        <main class="main-content">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-title">Active Orders</div>
+                        <div>📦</div>
+                    </div>
+                    <div class="card-value">5</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-title">Delivered This Month</div>
+                        <div>✅</div>
+                    </div>
+                    <div class="card-value">12</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-title">Total Spent</div>
+                        <div>💰</div>
+                    </div>
+                    <div class="card-value">$349.99</div>
+                </div>
+            </div>
+
+            <div class="recent-orders">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Orders</h2>
+                    <a href="my_orders.html" class="view-all">View All</a>
+                </div>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Destination</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="window.location.href='order_details.html?id=ORD001'" style="cursor: pointer;">
+                            <td>#ORD001</td>
+                            <td>2024-02-21</td>
+                            <td>New York, NY</td>
+                            <td>$49.99</td>
+                            <td><span class="status-badge status-delivered">Delivered</span></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD002</td>
+                            <td>2024-02-20</td>
+                            <td>Los Angeles, CA</td>
+                            <td>$79.99</td>
+                            <td><span class="status-badge status-transit">In Transit</span></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD003</td>
+                            <td>2024-02-19</td>
+                            <td>Chicago, IL</td>
+                            <td>$29.99</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 
