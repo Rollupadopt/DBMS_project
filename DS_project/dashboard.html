@@ -248,6 +248,32 @@
         .logout-btn:hover {
             background: #e04252;
         }
+
+        /* Go Back Button Style */
+        .go-back-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 30px;
+            background: #4169E1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .go-back-btn:hover {
+            background: #3157d1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -277,7 +303,7 @@
                 <li><a href="settings.html" class="nav-item">Settings</a></li>
                 <li><a href="contact_service.html" class="nav-item">Support</a></li>
             </ul>
-            <a href="home.html" class="logout-btn">Logout</a>
+            <a href="index.html" class="logout-btn">Logout</a>
         </aside>
 
         <main class="main-content">
@@ -347,5 +373,8 @@
             </div>
         </main>
     </div>
+    <a href="index.html" class="go-back-btn">
+        <span>←</span> Go Back Home
+    </a>
 </body>
 </html> 
