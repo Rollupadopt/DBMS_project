@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Payment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            font-size: 24px;
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        .payment-container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .payment-methods {
+            margin-bottom: 30px;
+        }
+
+        .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: #4169E1;
+            background: #f5f8ff;
+        }
+
+        .payment-method.selected {
+            border-color: #4169E1;
+            background: #f5f8ff;
+        }
+
+        .payment-icon {
+            font-size: 24px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .promotion-section {
+            margin-bottom: 30px;
+        }
+
+        .promo-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .apply-btn {
+            padding: 8px 15px;
+            background: #4169E1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .order-summary {
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .total-row {
+            border-top: 2px solid #ddd;
+            margin-top: 15px;
+            padding-top: 15px;
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 15px;
+            background: #4169E1;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .confirm-btn:hover {
+            background: #3558c4;
+        }
+
+        .qr-section {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .qr-section.show {
+            display: block;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: #f0f0f0;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="drink-customization.html" class="back-btn">←</a>
+        <div>Payment</div>
+    </div>
+
+    <div class="payment-container">
+        <div class="payment-methods">
+            <div class="payment-method" onclick="selectPayment('cash')">
+                <div class="payment-icon">💵</div>
+                <div>Cash Payment</div>
+            </div>
+
+            <div class="payment-method" onclick="selectPayment('qr')">
+                <div class="payment-icon">📱</div>
+                <div>QR Payment</div>
+            </div>
+        </div>
+
+        <div class="qr-section" id="qrSection">
+            <div class="qr-code">
+                <!-- QR Code will be displayed here -->
+            </div>
+            <p style="margin-top: 10px;">Scan to pay</p>
+        </div>
+
+        <div class="promotion-section">
+            <input type="text" class="promo-input" placeholder="Enter promotion code">
+            <button class="apply-btn">Apply</button>
+        </div>
+
+        <div class="order-summary">
+            <div class="summary-title">Order Summary</div>
+            <div class="summary-row">
+                <span>Latte (Hot)</span>
+                <span>฿35.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Extra shot</span>
+                <span>฿15.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Whipped cream</span>
+                <span>฿10.00</span>
+            </div>
+            <div class="summary-row total-row">
+                <span>Total</span>
+                <span>฿60.00</span>
+            </div>
+        </div>
+
+        <button class="confirm-btn" onclick="confirmPayment()">Confirm Payment</button>
+    </div>
+
+    <script>
+        function selectPayment(method) {
+            // Remove selected class from all payment methods
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked method
+            event.currentTarget.classList.add('selected');
+            
+            // Show/hide QR section
+            const qrSection = document.getElementById('qrSection');
+            if (method === 'qr') {
+                qrSection.classList.add('show');
+            } else {
+                qrSection.classList.remove('show');
+            }
+        }
+
+        function confirmPayment() {
+            // Add payment processing logic here
+            alert('Payment successful!');
+            window.location.href = 'confirmation.html';
+        }
+    </script>
+</body>
+</html>

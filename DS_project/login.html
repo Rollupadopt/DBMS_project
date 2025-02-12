@@ -209,6 +209,16 @@
                 <input type="password" class="form-input" placeholder="Enter your password" required>
             </div>
 
+            <div class="form-group">
+                <label class="form-label">Select Role</label>
+                <select class="form-input" id="userRole" required>
+                    <option value="" disabled selected>Choose your role</option>
+                    <option value="customer">Customer</option>
+                    <option value="administrator">Administrator</option>
+                    <option value="service_provider">Service Provider</option>
+                </select>
+            </div>
+
             <div class="forgot-password">
                 <a href="#">Forgot Password?</a>
             </div>
@@ -238,8 +248,23 @@
 
     <script>
         function validateForm() {
+            const role = document.getElementById('userRole').value;
             // You can add validation logic here
-            window.location.href = 'dashboard.html';
+            // Redirect to different dashboards based on role
+            switch(role) {
+                case 'customer':
+                    window.location.href = 'dashboard.html';
+                    break;
+                case 'administrator':
+                    window.location.href = 'admin-dashboard.html';
+                    break;
+                case 'service_provider':
+                    window.location.href = 'provider-dashboard.html';
+                    break;
+                default:
+                    alert('Please select a role');
+                    return false;
+            }
             return false; // Prevents the default form submission
         }
     </script>

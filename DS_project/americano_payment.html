@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Americano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            font-size: 24px;
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .order-summary {
+            margin-bottom: 30px;
+        }
+
+        .order-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .order-details {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .payment-methods {
+            margin-bottom: 30px;
+        }
+
+        .payment-option {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .payment-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .payment-option.selected {
+            border-color: #4CAF50;
+            background-color: #e8f5e9;
+        }
+
+        .payment-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .confirm-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .confirm-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="americano-customization.html" class="back-btn">←</a>
+        <div class="page-title">Payment</div>
+    </div>
+
+    <div class="main-container">
+        <div class="order-summary">
+            <div class="order-title">Order Summary</div>
+            <div class="order-details">
+                <div class="detail-row">
+                    <span>Drink:</span>
+                    <span>Americano</span>
+                </div>
+                <div class="detail-row">
+                    <span>Type:</span>
+                    <span>Hot</span>
+                </div>
+                <div class="detail-row">
+                    <span>Size:</span>
+                    <span>Medium</span>
+                </div>
+                <div class="detail-row">
+                    <span>Shot:</span>
+                    <span>Single</span>
+                </div>
+                <div class="detail-row">
+                    <span>Sweetness:</span>
+                    <span>50%</span>
+                </div>
+                <div class="detail-row">
+                    <span>Original Price:</span>
+                    <span>฿65</span>
+                </div>
+                <div class="detail-row" style="font-weight: bold; margin-top: 15px;">
+                    <span>Total:</span>
+                    <span>฿75</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <div class="order-title">Payment Method</div>
+            <div class="payment-option" onclick="selectPayment(this)">
+                <input type="radio" name="payment" value="cash">
+                <span>Cash</span>
+            </div>
+            <div class="payment-option" onclick="selectPayment(this)">
+                <input type="radio" name="payment" value="promptpay">
+                <span>PromptPay</span>
+            </div>
+        </div>
+
+        <button class="confirm-btn" onclick="confirmPayment()">Confirm Payment</button>
+    </div>
+
+    <script>
+        // Get URL parameters when page loads
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const basePrice = 65; // Original price for Americano
+            let totalAddOns = 0;
+            
+            // Update order details from URL parameters
+            document.querySelector('.detail-row:nth-child(1) span:last-child').textContent = urlParams.get('drink') || 'Americano';
+            document.querySelector('.detail-row:nth-child(2) span:last-child').textContent = urlParams.get('type') || 'Hot';
+            document.querySelector('.detail-row:nth-child(3) span:last-child').textContent = urlParams.get('size') || 'Regular';
+            document.querySelector('.detail-row:nth-child(4) span:last-child').textContent = urlParams.get('shot') || 'Single';
+            document.querySelector('.detail-row:nth-child(5) span:last-child').textContent = urlParams.get('sweetness') || '50%';
+            
+            // Calculate add-ons
+            const type = urlParams.get('type');
+            const size = urlParams.get('size');
+            const shot = urlParams.get('shot');
+
+            if (type && type.includes('Cold')) {
+                totalAddOns += 5;
+            }
+            
+            if (size && size.includes('Medium')) {
+                totalAddOns += 10;
+            } else if (size && size.includes('Large')) {
+                totalAddOns += 20;
+            }
+            
+            if (shot && shot.includes('Double')) {
+                totalAddOns += 20;
+            } else if (shot && shot.includes('Triple')) {
+                totalAddOns += 40;
+            }
+
+            // Update original price and total
+            document.querySelector('.detail-row:nth-child(6) span:last-child').textContent = `฿${basePrice}`;
+            document.querySelector('.detail-row:last-child span:last-child').textContent = `฿${basePrice + totalAddOns}`;
+        }
+
+        function selectPayment(element) {
+            // Remove selected class from all options
+            const options = document.querySelectorAll('.payment-option');
+            options.forEach(option => option.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Check the radio button
+            const radio = element.querySelector('input[type="radio"]');
+            radio.checked = true;
+        }
+
+        function confirmPayment() {
+            const selectedPayment = document.querySelector('input[name="payment"]:checked');
+            if (!selectedPayment) {
+                alert('Please select a payment method');
+                return;
+            }
+            
+            alert('Payment successful! Thank you for your order.');
+            window.location.href = 'index.html'; // Redirect to home page after payment
+        }
+    </script>
+</body>
+</html> 
