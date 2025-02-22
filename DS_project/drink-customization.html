@@ -87,13 +87,7 @@
 
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .sweetness-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
 
@@ -150,39 +144,12 @@
         </div>
 
         <div class="customization-section">
-            <div class="section-title">Type</div>
+            <div class="section-title">Quantity</div>
             <div class="options-grid">
-                <div class="option-item selected" onclick="selectOption(this, 'type')">Hot</div>
-                <div class="option-item" onclick="selectOption(this, 'type')">Cold (+฿5)</div>
-            </div>
-        </div>
-
-        <div class="customization-section">
-            <div class="section-title">Size</div>
-            <div class="options-grid">
-                <div class="option-item" onclick="selectOption(this, 'size')">Small</div>
-                <div class="option-item" onclick="selectOption(this, 'size')">Medium (+฿10)</div>
-                <div class="option-item" onclick="selectOption(this, 'size')">Large (+฿20)</div>
-            </div>
-        </div>
-
-        <div class="customization-section">
-            <div class="section-title">Shot Options</div>
-            <div class="options-grid">
-                <div class="option-item" onclick="selectOption(this, 'shot')">Single</div>
-                <div class="option-item" onclick="selectOption(this, 'shot')">Double (+฿20)</div>
-                <div class="option-item" onclick="selectOption(this, 'shot')">Triple (+฿40)</div>
-            </div>
-        </div>
-
-        <div class="customization-section">
-            <div class="section-title">Sweetness Level</div>
-            <div class="sweetness-grid">
-                <div class="option-item" onclick="selectOption(this, 'sweetness')">0%</div>
-                <div class="option-item" onclick="selectOption(this, 'sweetness')">25%</div>
-                <div class="option-item selected" onclick="selectOption(this, 'sweetness')">50%</div>
-                <div class="option-item" onclick="selectOption(this, 'sweetness')">75%</div>
-                <div class="option-item" onclick="selectOption(this, 'sweetness')">100%</div>
+                <div class="option-item" onclick="selectOption(this, 'quantity')">20</div>
+                <div class="option-item" onclick="selectOption(this, 'quantity')">30</div>
+                <div class="option-item" onclick="selectOption(this, 'quantity')">40</div>
+                <div class="option-item" onclick="selectOption(this, 'quantity')">50</div>
             </div>
         </div>
 
@@ -210,19 +177,29 @@
         }
 
         function addToCart() {
-            const type = document.querySelector('.options-grid .selected').textContent;
-            const size = document.querySelector('.customization-section:nth-child(3) .selected').textContent;
-            const shot = document.querySelector('.customization-section:nth-child(4) .selected').textContent;
-            const sweetness = document.querySelector('.sweetness-grid .selected').textContent;
+            console.log("Add to Cart button clicked"); // Debugging log
+
+            const quantityElement = document.querySelector('.options-grid .selected');
+            const quantity = quantityElement ? quantityElement.textContent : 'Not selected';
 
             const params = new URLSearchParams(window.location.search);
-            params.append('drink', params.get('name'));
-            params.append('type', type);
-            params.append('size', size);
-            params.append('shot', shot);
-            params.append('sweetness', sweetness);
+            const drinkName = params.get('name');
+            const drinkPrice = parseFloat(params.get('price'));
 
-            window.location.href = `americano_payment.html?${params.toString()}`;
+            // Store the current order in local storage
+            const currentOrder = {
+                drink: drinkName,
+                price: drinkPrice,
+                quantity: quantity
+            };
+
+            // Retrieve existing orders from local storage
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(currentOrder);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // Redirect to the payment page
+            window.location.href = `payment.html?${params.toString()}`;
         }
     </script>
 </body>
