@@ -113,47 +113,59 @@
     </div>
 
     <div class="drinks-grid">
-        <div class="drink-item" onclick="location.href='espresso-customization.html'">
+        <div class="drink-item" onclick="goToCustomization('Espresso', 60, 'picture/Espresso.png', 'Pure coffee shot')">
             <img src="picture/Espresso.png" alt="Espresso" class="drink-image">
             <div class="drink-name">Espresso</div>
             <div class="drink-description">Pure coffee shot</div>
             <div class="drink-price">฿60</div>
         </div>
 
-        <div class="drink-item" onclick="location.href='americano-customization.html'">
+        <div class="drink-item" onclick="goToCustomization('Americano', 65, 'picture/Americano.png', 'Espresso + Hot water')">
             <img src="picture/Americano.png" alt="Americano" class="drink-image">
             <div class="drink-name">Americano</div>
             <div class="drink-description">Espresso + Hot water</div>
             <div class="drink-price">฿65</div>
         </div>
 
-        <div class="drink-item" onclick="location.href='latte-customization.html'">
+        <div class="drink-item" onclick="goToCustomization('Latte', 70, 'picture/Latte.png', 'Espresso + Steamed milk')">
             <img src="picture/Latte.png" alt="Latte" class="drink-image">
             <div class="drink-name">Cafe Latte</div>
             <div class="drink-description">Espresso + Steamed milk</div>
             <div class="drink-price">฿70</div>
         </div>
 
-        <div class="drink-item" onclick="location.href='cappuccino-customization.html'">
+        <div class="drink-item" onclick="goToCustomization('Cappuccino', 70, 'picture/Cappu.png', 'Espresso + Milk foam')">
             <img src="picture/Cappu.png" alt="Cappuccino" class="drink-image">
             <div class="drink-name">Cappuccino</div>
             <div class="drink-description">Espresso + Milk foam</div>
             <div class="drink-price">฿70</div>
         </div>
 
-        <div class="drink-item" onclick="location.href='mocha-customization.html'">
+        <div class="drink-item" onclick="goToCustomization('Mocha', 75, 'picture/Mocca.png', 'Espresso + Chocolate + Milk')">
             <img src="picture/Mocca.png" alt="Mocha" class="drink-image">
             <div class="drink-name">Cafe Mocha</div>
             <div class="drink-description">Espresso + Chocolate + Milk</div>
             <div class="drink-price">฿75</div>
         </div>
 
-        <div class="drink-item" onclick="location.href='caramel-macchiato-customization.html'">
+        <div class="drink-item" onclick="goToCustomization('Caramel Macchiato', 80, 'picture/Caramel.png', 'Espresso + Vanilla + Caramel')">
             <img src="picture/Caramel.png" alt="Caramel Macchiato" class="drink-image">
             <div class="drink-name">Caramel Macchiato</div>
             <div class="drink-description">Espresso + Vanilla + Caramel</div>
             <div class="drink-price">฿80</div>
         </div>
     </div>
+
+    <script>
+        function goToCustomization(name, price, image, description) {
+            const params = new URLSearchParams({
+                name: name,
+                price: price,
+                image: image,
+                description: description
+            });
+            window.location.href = `drink-customization.html?${params.toString()}`;
+        }
+    </script>
 </body>
 </html> 
