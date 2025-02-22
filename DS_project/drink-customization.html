@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caramel Macchiato Customization - TasticQ</title>
+    <title>Americano Customization - TasticQ</title>
     <style>
-        /* Same styles as previous customization pages */
+        /* Same styles as espresso-customization.html */
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +13,6 @@
             font-family: Arial, sans-serif;
         }
 
-        /* ... (same styles as mocha-customization.html) ... */
         body {
             background-color: #f5f5f5;
         }
@@ -65,6 +64,12 @@
             margin-bottom: 10px;
         }
 
+        .drink-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
         .drink-price {
             font-size: 20px;
             color: #666;
@@ -82,13 +87,7 @@
 
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .sweetness-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
 
@@ -131,52 +130,26 @@
 <body>
     <div class="header">
         <a href="HOT_COFFEE.html" class="back-btn">←</a>
-        <div class="category-title">Customize Your Caramel Macchiato</div>
+        <div class="category-title">Customize Your Drink</div>
     </div>
 
     <div class="main-container">
         <div class="drink-header">
-            <img src="picture/Caramel.png" alt="Caramel Macchiato" class="drink-image">
+            <img src="" alt="" id="drinkImage" class="drink-image">
             <div class="drink-info">
-                <div class="drink-name">Caramel Macchiato</div>
-                <div class="drink-price">Starting from ฿80</div>
+                <div class="drink-name" id="drinkName"></div>
+                <div class="drink-description" id="drinkDescription" style="font-size: 14px; color: #666; margin-bottom: 5px;"></div>
+                <div class="drink-price" id="drinkPrice"></div>
             </div>
         </div>
 
         <div class="customization-section">
-            <div class="section-title">Type</div>
+            <div class="section-title">Quantity</div>
             <div class="options-grid">
-                <div class="option-item selected" onclick="selectOption(this, 'type')">Hot</div>
-                <div class="option-item" onclick="selectOption(this, 'type')">Cold (+฿5)</div>
-            </div>
-        </div>
-
-        <div class="customization-section">
-            <div class="section-title">Size</div>
-            <div class="options-grid">
-                <div class="option-item" onclick="selectOption(this, 'size')">Small</div>
-                <div class="option-item" onclick="selectOption(this, 'size')">Medium (+฿10)</div>
-                <div class="option-item" onclick="selectOption(this, 'size')">Large (+฿20)</div>
-            </div>
-        </div>
-
-        <div class="customization-section">
-            <div class="section-title">Shot Options</div>
-            <div class="options-grid">
-                <div class="option-item" onclick="selectOption(this, 'shot')">Single</div>
-                <div class="option-item" onclick="selectOption(this, 'shot')">Double (+฿20)</div>
-                <div class="option-item" onclick="selectOption(this, 'shot')">Triple (+฿40)</div>
-            </div>
-        </div>
-
-        <div class="customization-section">
-            <div class="section-title">Sweetness Level</div>
-            <div class="sweetness-grid">
-                <div class="option-item" onclick="selectOption(this, 'sweetness')">0%</div>
-                <div class="option-item" onclick="selectOption(this, 'sweetness')">25%</div>
-                <div class="option-item selected" onclick="selectOption(this, 'sweetness')">50%</div>
-                <div class="option-item" onclick="selectOption(this, 'sweetness')">75%</div>
-                <div class="option-item" onclick="selectOption(this, 'sweetness')">100%</div>
+                <div class="option-item" onclick="selectOption(this, 'quantity')">20</div>
+                <div class="option-item" onclick="selectOption(this, 'quantity')">30</div>
+                <div class="option-item" onclick="selectOption(this, 'quantity')">40</div>
+                <div class="option-item" onclick="selectOption(this, 'quantity')">50</div>
             </div>
         </div>
 
@@ -184,6 +157,15 @@
     </div>
 
     <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            document.getElementById('drinkName').textContent = params.get('name');
+            document.getElementById('drinkDescription').textContent = params.get('description');
+            document.getElementById('drinkPrice').textContent = `Starting from ฿${params.get('price')}`;
+            document.getElementById('drinkImage').src = params.get('image');
+            document.getElementById('drinkImage').alt = params.get('name');
+        }
+
         function selectOption(element, group) {
             // Remove selected class from other options in the same group
             const siblings = element.parentElement.children;
@@ -193,25 +175,31 @@
             // Add selected class to clicked element
             element.classList.add('selected');
         }
+
         function addToCart() {
-            // Get all selected options using the correct selectors
-            const type = document.querySelector('.options-grid .selected').textContent;
-            const size = document.querySelector('.customization-section:nth-child(3) .selected').textContent;
-            const shot = document.querySelector('.customization-section:nth-child(4) .selected').textContent;
-            const sweetness = document.querySelector('.sweetness-grid .selected').textContent;
+            console.log("Add to Cart button clicked"); // Debugging log
 
-            // Create URL parameters
-            const params = new URLSearchParams({
-                drink: 'Caramel-Macchiato',
-                type: type,
-                size: size,
-                shot: shot,
-                sweetness: sweetness
-            });
+            const quantityElement = document.querySelector('.options-grid .selected');
+            const quantity = quantityElement ? quantityElement.textContent : 'Not selected';
 
-            // Redirect to payment page with parameters
-            window.location.href = `Caramel-Macchiato_payment.html?${params.toString()}`;
+            const params = new URLSearchParams(window.location.search);
+            const drinkName = params.get('name');
+            const drinkPrice = parseFloat(params.get('price'));
 
+            // Store the current order in local storage
+            const currentOrder = {
+                drink: drinkName,
+                price: drinkPrice,
+                quantity: quantity
+            };
+
+            // Retrieve existing orders from local storage
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(currentOrder);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // Redirect to the payment page
+            window.location.href = `payment.html?${params.toString()}`;
         }
     </script>
 </body>
