@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Soda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;  /* Light gray background */
+        }
+
+        .header {
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            font-size: 24px;
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        .category-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .drink-item {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);  /* Slightly enhanced shadow */
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;  /* Added shadow transition */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .drink-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.12);  /* Enhanced shadow on hover */
+        }
+
+        .drink-image {
+            width: 120px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .drink-name {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .drink-description {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .drink-price {
+            color: #666;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .drinks-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .drinks-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="menu.html" class="back-btn">←</a>
+        <div class="category-title">Soda</div>
+    </div>
+
+    <div class="drinks-grid">
+        <div class="drink-item" onclick="goToCustomization('Cola', 50, 'picture/Cola.png', 'Classic cola drink')">
+            <img src="picture/Cola.png" alt="Cola" class="drink-image">
+            <div class="drink-name">Cola</div>
+            <div class="drink-description">Classic cola drink</div>
+            <div class="drink-price">฿50</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Lemonade', 45, 'picture/Lemonade.png', 'Refreshing lemonade')">
+            <img src="picture/Lemonade.png" alt="Lemonade" class="drink-image">
+            <div class="drink-name">Lemonade</div>
+            <div class="drink-description">Refreshing lemonade</div>
+            <div class="drink-price">฿45</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Orange Soda', 55, 'picture/OrangeSoda.png', 'Sweet orange soda')">
+            <img src="picture/OrangeSoda.png" alt="Orange Soda" class="drink-image">
+            <div class="drink-name">Orange Soda</div>
+            <div class="drink-description">Sweet orange soda</div>
+            <div class="drink-price">฿55</div>
+        </div>
+
+        <!-- New Soda Items -->
+        <div class="drink-item" onclick="goToCustomization('Grape Soda', 60, 'picture/GrapeSoda.png', 'Delicious grape soda')">
+            <img src="picture/GrapeSoda.png" alt="Grape Soda" class="drink-image">
+            <div class="drink-name">Grape Soda</div>
+            <div class="drink-description">Delicious grape soda</div>
+            <div class="drink-price">฿60</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Root Beer', 65, 'picture/RootBeer.png', 'Classic root beer')">
+            <img src="picture/RootBeer.png" alt="Root Beer" class="drink-image">
+            <div class="drink-name">Root Beer</div>
+            <div class="drink-description">Classic root beer</div>
+            <div class="drink-price">฿65</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Cream Soda', 70, 'picture/CreamSoda.png', 'Sweet cream soda')">
+            <img src="picture/CreamSoda.png" alt="Cream Soda" class="drink-image">
+            <div class="drink-name">Cream Soda</div>
+            <div class="drink-description">Sweet cream soda</div>
+            <div class="drink-price">฿70</div>
+        </div>
+    </div>
+
+    <script>
+        function goToCustomization(name, price, image, description) {
+            const params = new URLSearchParams({
+                name: name,
+                price: price,
+                image: image,
+                description: description
+            });
+            window.location.href = `drink-customization.html?${params.toString()}`;
+        }
+    </script>
+</body>
+</html>

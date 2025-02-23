@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Smoothie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;  /* Light gray background */
+        }
+
+        .header {
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            font-size: 24px;
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        .category-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .drink-item {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);  /* Slightly enhanced shadow */
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;  /* Added shadow transition */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .drink-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.12);  /* Enhanced shadow on hover */
+        }
+
+        .drink-image {
+            width: 120px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .drink-name {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .drink-description {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .drink-price {
+            color: #666;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .drinks-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .drinks-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="menu.html" class="back-btn">←</a>
+        <div class="category-title">Smoothie</div>
+    </div>
+
+    <div class="drinks-grid">
+        <div class="drink-item" onclick="goToCustomization('Mango Smoothie', 70, 'picture/orange.png', 'Delicious mango smoothie')">
+            <img src="picture/Orange.png" alt="orange Smoothie" class="drink-image">
+            <div class="drink-name">Orange Smoothie</div>
+            <div class="drink-description">Delicious orange smoothie</div>
+            <div class="drink-price">฿70</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Berry Smoothie', 75, 'picture/Berry.png', 'Mixed berry smoothie')">
+            <img src="picture/Berry.png" alt="Berry Smoothie" class="drink-image">
+            <div class="drink-name">Berry Smoothie</div>
+            <div class="drink-description">Mixed berry smoothie</div>
+            <div class="drink-price">฿75</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Avocado Smoothie', 65, 'picture/Avocado.png', 'Creamy banana smoothie')">
+            <img src="picture/Avocado.png" alt="Banana Smoothie" class="drink-image">
+            <div class="drink-name">Avocado Smoothie</div>
+            <div class="drink-description">Creamy Avocado smoothie</div>
+            <div class="drink-price">฿65</div>
+        </div>
+
+        <!-- New Smoothie Items -->
+        <div class="drink-item" onclick="goToCustomization('Banana Smoothie', 70, 'picture/Banana.png', 'Tropical pineapple smoothie')">
+            <img src="picture/Banana.png" alt="Pineapple Smoothie" class="drink-image">
+            <div class="drink-name">Banana Smoothie</div>
+            <div class="drink-description">Tropical Banana smoothie</div>
+            <div class="drink-price">฿70</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Green Smoothie', 75, 'picture/Green.png', 'Healthy green smoothie')">
+            <img src="picture/Green.png" alt="Green Smoothie" class="drink-image">
+            <div class="drink-name">Green Smoothie</div>
+            <div class="drink-description">Healthy green smoothie</div>
+            <div class="drink-price">฿75</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Strawberry Smoothie', 65, 'picture/Strawberry.png', 'Sweet peach smoothie')">
+            <img src="picture/Strawberry.png" alt="Peach Smoothie" class="drink-image">
+            <div class="drink-name">Starwberry Smoothie</div>
+            <div class="drink-description">Sweet Strawberry smoothie</div>
+            <div class="drink-price">฿65</div>
+        </div>
+    </div>
+
+    <script>
+        function goToCustomization(name, price, image, description) {
+            const params = new URLSearchParams({
+                name: name,
+                price: price,
+                image: image,
+                description: description
+            });
+            window.location.href = `drink-customization.html?${params.toString()}`;
+        }
+    </script>
+</body>
+</html>

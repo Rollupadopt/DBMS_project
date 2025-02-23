@@ -129,8 +129,8 @@
 </head>
 <body>
     <div class="header">
-        <a href="HOT_COFFEE.html" class="back-btn">←</a>
-        <div class="category-title">Customize Your Drink</div>
+        <a href="menu.html" class="back-btn">←</a>
+        <div>Customization</div>
     </div>
 
     <div class="main-container">
@@ -164,6 +164,7 @@
             document.getElementById('drinkPrice').textContent = `Starting from ฿${params.get('price')}`;
             document.getElementById('drinkImage').src = params.get('image');
             document.getElementById('drinkImage').alt = params.get('name');
+            console.log(params.get('image')); // Check if the image URL is correct
         }
 
         function selectOption(element, group) {
@@ -177,8 +178,6 @@
         }
 
         function addToCart() {
-            console.log("Add to Cart button clicked"); // Debugging log
-
             const quantityElement = document.querySelector('.options-grid .selected');
             const quantity = quantityElement ? quantityElement.textContent : 'Not selected';
 
@@ -199,7 +198,7 @@
             localStorage.setItem('orders', JSON.stringify(orders));
 
             // Redirect to the payment page
-            window.location.href = `payment.html?${params.toString()}`;
+            window.location.href = `payment.html`;
         }
     </script>
 </body>
