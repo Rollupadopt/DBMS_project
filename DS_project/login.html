@@ -104,58 +104,6 @@
             background: #3157d1;
         }
 
-        .social-login {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .social-login-title {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .social-login-title::before,
-        .social-login-title::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 45%;
-            height: 1px;
-            background: #ddd;
-        }
-
-        .social-login-title::before {
-            left: 0;
-        }
-
-        .social-login-title::after {
-            right: 0;
-        }
-
-        .social-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .social-button {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #ddd;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .social-button:hover {
-            transform: translateY(-3px);
-        }
-
         .register-link {
             text-align: center;
             margin-top: 20px;
@@ -194,52 +142,18 @@
     <div class="login-container">
         <div class="login-header">
             <div class="logo">TasticQ</div>
-            <h1 class="login-title">Welcome Back!</h1>
-            <p class="login-subtitle">Please login to your account</p>
+            <h1 class="login-title">Welcome!</h1>
+            <p class="login-subtitle">Please enter your username</p>
         </div>
 
-        <form action="dashboard.html" method="GET" onsubmit="return validateForm()">
+        <form onsubmit="return validateForm()">
             <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-input" placeholder="Enter your email" required>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-input" placeholder="Enter your password" required>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Select Role</label>
-                <select class="form-input" id="userRole" required>
-                    <option value="" disabled selected>Choose your role</option>
-                    <option value="customer">Customer</option>
-                    <option value="administrator">Administrator</option>
-                    <option value="service_provider">Service Provider</option>
-                </select>
-            </div>
-
-            <div class="forgot-password">
-                <a href="#">Forgot Password?</a>
+                <label class="form-label">Username</label>
+                <input type="text" class="form-input" placeholder="Enter your username" required>
             </div>
 
             <button type="submit" class="login-button">Login</button>
         </form>
-
-        <div class="social-login">
-            <p class="social-login-title">Or login with</p>
-            <div class="social-buttons">
-                <div class="social-button">
-                    <img src="picture/the-new-google-logo-is-a-lesson-in-modern-design-490648-3.jpg" alt="Google" width="40">
-                </div>
-                <div class="social-button">
-                    <img src="picture/new-facebook-logo-2019.jpg" alt="Facebook" width="50">
-                </div>
-                <div class="social-button">
-                    <img src="picture/d1uvh7n-e24578d5-931d-4c6c-aa66-5e706245f0e9.jpg" alt="Apple" width="35">
-                </div>
-            </div>
-        </div>
 
         <div class="register-link">
             Don't have an account? <a href="register.html">Sign up</a>
@@ -248,22 +162,18 @@
 
     <script>
         function validateForm() {
-            const role = document.getElementById('userRole').value;
-            // You can add validation logic here
-            // Redirect to different dashboards based on role
-            switch(role) {
-                case 'customer':
-                    window.location.href = 'dashboard.html';
-                    break;
-                case 'administrator':
-                    window.location.href = 'admin-dashboard.html';
-                    break;
-                case 'service_provider':
-                    window.location.href = 'provider-dashboard.html';
-                    break;
-                default:
-                    alert('Please select a role');
-                    return false;
+            const username = document.querySelector('.form-input').value;
+
+            // Check if the username starts with CS, AD, or SP
+            if (username.startsWith('CS')) {
+                window.location.href = 'dashboard.html';
+            } else if (username.startsWith('AD')) {
+                window.location.href = 'admin-dashboard.html';
+            } else if (username.startsWith('SP')) {
+                window.location.href = 'service_admin.html';
+            } else {
+                alert('Invalid username. Please ensure it starts with CS, AD, or SP.');
+                return false; // Prevent form submission
             }
             return false; // Prevents the default form submission
         }
