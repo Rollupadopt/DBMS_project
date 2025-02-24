@@ -142,29 +142,15 @@
     <div class="login-container">
         <div class="login-header">
             <div class="logo">TasticQ</div>
-            <h1 class="login-title">Welcome Back!</h1>
-            <p class="login-subtitle">Please login to your account</p>
+            <h1 class="login-title">Welcome!</h1>
+            <p class="login-subtitle">Please enter your username</p>
         </div>
 
-        <form action="dashboard.html" method="GET" onsubmit="return validateForm()">
+        <form onsubmit="return validateForm()">
             <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-input" placeholder="Enter your email" required>
-            </div>
 
-            <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-input" placeholder="Enter your password" required>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Select Role</label>
-                <select class="form-input" id="userRole" required>
-                    <option value="" disabled selected>Choose your role</option>
-                    <option value="customer">Customer</option>
-                    <option value="administrator">Administrator</option>
-                    <option value="service_provider">Service Provider</option>
-                </select>
+                <label class="form-label">Username</label>
+                <input type="text" class="form-input" placeholder="Enter your username" required>
             </div>
 
             <button type="submit" class="login-button">Login</button>
@@ -177,22 +163,18 @@
 
     <script>
         function validateForm() {
-            const role = document.getElementById('userRole').value;
-            // You can add validation logic here
-            // Redirect to different dashboards based on role
-            switch(role) {
-                case 'customer':
-                    window.location.href = 'dashboard.html';
-                    break;
-                case 'administrator':
-                    window.location.href = 'admin-dashboard.html';
-                    break;
-                case 'service_provider':
-                    window.location.href = 'provider-dashboard.html';
-                    break;
-                default:
-                    alert('Please select a role');
-                    return false;
+            const username = document.querySelector('.form-input').value;
+
+            // Check if the username starts with CS, AD, or SP
+            if (username.startsWith('CS')) {
+                window.location.href = 'dashboard.html';
+            } else if (username.startsWith('AD')) {
+                window.location.href = 'admin-dashboard.html';
+            } else if (username.startsWith('SP')) {
+                window.location.href = 'service_admin.html';
+            } else {
+                alert('Invalid username. Please ensure it starts with CS, AD, or SP.');
+                return false; // Prevent form submission
             }
             return false; // Prevents the default form submission
         }
