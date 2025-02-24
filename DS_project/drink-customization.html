@@ -158,7 +158,6 @@
 
     <script>
         window.onload = function() {
-<<<<<<< HEAD
             // ดึงข้อมูลจาก local storage
             const currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
             if (currentOrder) {
@@ -171,15 +170,7 @@
                 // ถ้าไม่มีข้อมูลใน local storage ให้แสดงข้อความหรือทำการจัดการอื่น ๆ
                 console.log("No drink information found.");
             }
-=======
-            const params = new URLSearchParams(window.location.search);
-            document.getElementById('drinkName').textContent = params.get('name');
-            document.getElementById('drinkDescription').textContent = params.get('description');
-            document.getElementById('drinkPrice').textContent = `Starting from ฿${params.get('price')}`;
-            document.getElementById('drinkImage').src = params.get('image');
-            document.getElementById('drinkImage').alt = params.get('name');
-            console.log(params.get('image')); // Check if the image URL is correct
->>>>>>> 74c3095928c809501db8e9104c9235ed5cda003e
+
         }
 
         function selectOption(element, group) {
