@@ -225,7 +225,8 @@
 
         <div class="promotion-section">
             <input type="text" class="promo-input" placeholder="Enter promotion code">
-            <button class="apply-btn">Apply</button>
+            <button class="apply-btn" onclick="applyDiscount()">Apply</button>
+            <div id="discountMessage" style="color: green;"></div>
         </div>
 
         <div class="order-summary">
@@ -277,6 +278,30 @@
             orders.splice(index, 1); // Remove the order at the specified index
             localStorage.setItem('orders', JSON.stringify(orders)); // Update local storage
             window.location.reload(); // Reload the page to reflect changes
+        }
+
+        function applyDiscount() {
+            const promoInput = document.querySelector('.promo-input');
+            const discountMessage = document.getElementById('discountMessage');
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            let totalPrice = 0;
+
+            // Calculate total price
+            orders.forEach(order => {
+                totalPrice += order.price * order.quantity;
+            });
+
+            // Check for valid promotion code
+            if (promoInput.value === 'dis5') { // Example promotion code
+                const discount = totalPrice * 0.05; // 5% discount
+                totalPrice -= discount; // Apply discount
+                discountMessage.textContent = `Discount applied: ฿${discount.toFixed(2)}`;
+            } else {
+                discountMessage.textContent = 'Invalid promotion code.';
+            }
+
+            // Update total price display
+            document.getElementById('totalPrice').textContent = `Total: ฿${totalPrice.toFixed(2)}`;
         }
 
         window.onload = function() {
