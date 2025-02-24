@@ -230,7 +230,7 @@
 
         <div class="order-summary">
             <div class="summary-title">Order Summary</div>
-            <div id="orderItems"></div>
+            <div id="orderItemsContainer"></div>
             <div class="summary-row total-row">
                 <span>Total</span>
                 <span id="totalPrice"></span>
@@ -264,7 +264,7 @@
             // Add payment processing logic here
             alert('Payment successful!');
             localStorage.removeItem('orders'); // Clear the orders from local storage
-            window.location.href = 'confirmation.html';
+            window.location.href = 'menu.html'; // Redirect to the menu page
         }
 
         function addMoreMenu() {
@@ -273,32 +273,27 @@
         }
 
         function deleteOrder(index) {
-            // Retrieve existing orders from local storage
             let orders = JSON.parse(localStorage.getItem('orders')) || [];
-            // Remove the order at the specified index
-            orders.splice(index, 1);
-            // Update local storage
-            localStorage.setItem('orders', JSON.stringify(orders));
-            // Refresh the order summary
-            displayOrders();
+            orders.splice(index, 1); // Remove the order at the specified index
+            localStorage.setItem('orders', JSON.stringify(orders)); // Update local storage
+            window.location.reload(); // Reload the page to reflect changes
         }
 
-        function displayOrders() {
+        window.onload = function() {
             const orders = JSON.parse(localStorage.getItem('orders')) || [];
-            const orderItemsContainer = document.getElementById('orderItems');
-            orderItemsContainer.innerHTML = ''; // Clear existing items
+            const orderItemsContainer = document.getElementById('orderItemsContainer');
             let totalPrice = 0;
 
             orders.forEach((order, index) => {
+                const calculatedPrice = order.price * order.quantity; // Calculate total for this order
                 const orderRow = document.createElement('div');
-                orderRow.className = 'summary-row';
-                const calculatedPrice = order.price * order.quantity; // Calculate total price for this item
+                orderRow.className = 'summary-row'; // Ensure this matches your existing UI
                 orderRow.innerHTML = `
                     <div class="summary-details">
                         <span>${order.drink}</span>
                         <div class="price-quantity">
                             <span>฿${order.price.toFixed(2)} x ${order.quantity}</span>
-                            <span class="calculated-price">฿${calculatedPrice.toFixed(2)}</span> <!-- Display calculated price -->
+                            <span class="calculated-price">฿${calculatedPrice.toFixed(2)}</span>
                             <span class="delete-btn" onclick="deleteOrder(${index})">X</span>
                         </div>
                     </div>
@@ -307,11 +302,8 @@
                 totalPrice += calculatedPrice; // Update total price
             });
 
-            document.getElementById('totalPrice').textContent = `฿${totalPrice.toFixed(2)}`;
-        }
-
-        window.onload = function() {
-            displayOrders();
+            // Display total price
+            document.getElementById('totalPrice').textContent = `Total: ฿${totalPrice.toFixed(2)}`;
         }
     </script>
 </body>

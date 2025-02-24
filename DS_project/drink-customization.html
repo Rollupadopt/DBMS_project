@@ -129,8 +129,8 @@
 </head>
 <body>
     <div class="header">
-        <a href="HOT_COFFEE.html" class="back-btn">←</a>
-        <div class="category-title">Customize Your Drink</div>
+        <a href="menu.html" class="back-btn">←</a>
+        <div>Customization</div>
     </div>
 
     <div class="main-container">
@@ -158,12 +158,18 @@
 
     <script>
         window.onload = function() {
-            const params = new URLSearchParams(window.location.search);
-            document.getElementById('drinkName').textContent = params.get('name');
-            document.getElementById('drinkDescription').textContent = params.get('description');
-            document.getElementById('drinkPrice').textContent = `Starting from ฿${params.get('price')}`;
-            document.getElementById('drinkImage').src = params.get('image');
-            document.getElementById('drinkImage').alt = params.get('name');
+            // ดึงข้อมูลจาก local storage
+            const currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
+            if (currentOrder) {
+                document.getElementById('drinkName').textContent = currentOrder.name;
+                document.getElementById('drinkDescription').textContent = currentOrder.description;
+                document.getElementById('drinkPrice').textContent = `Starting from ฿${currentOrder.price}`;
+                document.getElementById('drinkImage').src = currentOrder.image;
+                document.getElementById('drinkImage').alt = currentOrder.name;
+            } else {
+                // ถ้าไม่มีข้อมูลใน local storage ให้แสดงข้อความหรือทำการจัดการอื่น ๆ
+                console.log("No drink information found.");
+            }
         }
 
         function selectOption(element, group) {
@@ -177,29 +183,29 @@
         }
 
         function addToCart() {
-            console.log("Add to Cart button clicked"); // Debugging log
-
             const quantityElement = document.querySelector('.options-grid .selected');
             const quantity = quantityElement ? quantityElement.textContent : 'Not selected';
 
             const params = new URLSearchParams(window.location.search);
             const drinkName = params.get('name');
             const drinkPrice = parseFloat(params.get('price'));
+            const drinkImage = params.get('image');
+            const drinkDescription = params.get('description');
 
-            // Store the current order in local storage
+            // เก็บข้อมูลใน local storage
             const currentOrder = {
-                drink: drinkName,
+                name: drinkName,
+                description: drinkDescription,
                 price: drinkPrice,
+                image: drinkImage,
                 quantity: quantity
             };
 
-            // Retrieve existing orders from local storage
-            let orders = JSON.parse(localStorage.getItem('orders')) || [];
-            orders.push(currentOrder);
-            localStorage.setItem('orders', JSON.stringify(orders));
+            // เก็บข้อมูลใน local storage
+            localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
 
             // Redirect to the payment page
-            window.location.href = `payment.html?${params.toString()}`;
+            window.location.href = `payment.html`;
         }
     </script>
 </body>

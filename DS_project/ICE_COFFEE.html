@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Ice Coffee</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;  /* Light gray background */
+        }
+
+        .header {
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            font-size: 24px;
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        .category-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .drink-item {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);  /* Slightly enhanced shadow */
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;  /* Added shadow transition */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .drink-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.12);  /* Enhanced shadow on hover */
+        }
+
+        .drink-image {
+            width: 120px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .drink-name {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .drink-description {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .drink-price {
+            color: #666;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .drinks-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .drinks-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="menu.html" class="back-btn">←</a>
+        <div class="category-title">Ice Coffee</div>
+    </div>
+
+    <div class="drinks-grid">
+        <div class="drink-item" onclick="goToCustomization('Iced Espresso', 60, 'picture/Espresso.png', 'Pure coffee shot')">
+            <img src="picture/Espresso.png" alt="Iced Espresso" class="drink-image">
+            <div class="drink-name">Iced Espresso</div>
+            <div class="drink-description">Pure coffee shot</div>
+            <div class="drink-price">฿60</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Iced Americano', 65, 'picture/Americano.png', 'Espresso + Hot water')">
+            <img src="picture/Americano.png" alt="Iced Americano" class="drink-image">
+            <div class="drink-name">Iced Americano</div>
+            <div class="drink-description">Espresso + Hot water</div>
+            <div class="drink-price">฿65</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Iced Latte', 70, 'picture/Latte.png', 'Espresso + Steamed milk')">
+            <img src="picture/Latte.png" alt="Iced Latte" class="drink-image">
+            <div class="drink-name">Iced Latte</div>
+            <div class="drink-description">Espresso + Steamed milk</div>
+            <div class="drink-price">฿70</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Iced Cappuccino', 70, 'picture/Cappu.png', 'Espresso + Milk foam')">
+            <img src="picture/Cappu.png" alt="Iced Cappuccino" class="drink-image">
+            <div class="drink-name">Iced Cappuccino</div>
+            <div class="drink-description">Espresso + Milk foam</div>
+            <div class="drink-price">฿70</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Iced Mocha', 75, 'picture/Mocca.png', 'Espresso + Chocolate + Milk')">
+            <img src="picture/Mocca.png" alt="Iced Mocha" class="drink-image">
+            <div class="drink-name">Iced Mocha</div>
+            <div class="drink-description">Espresso + Chocolate + Milk</div>
+            <div class="drink-price">฿75</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Iced Caramel Macchiato', 80, 'picture/Caramel.png', 'Espresso + Vanilla + Caramel')">
+            <img src="picture/Caramel.png" alt="Iced Caramel Macchiato" class="drink-image">
+            <div class="drink-name">Iced Caramel Macchiato</div>
+            <div class="drink-description">Espresso + Vanilla + Caramel</div>
+            <div class="drink-price">฿80</div>
+        </div>
+    </div>
+
+    <script>
+        function goToCustomization(name, price, image, description) {
+            const params = new URLSearchParams({
+                name: name,
+                price: price,
+                image: image,
+                description: description
+            });
+            window.location.href = `drink-customization.html?${params.toString()}`;
+        }
+    </script>
+</body>
+</html>

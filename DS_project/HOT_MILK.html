@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasticQ - Hot Milk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;  /* Light gray background */
+        }
+
+        .header {
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            font-size: 24px;
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        .category-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .drink-item {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);  /* Slightly enhanced shadow */
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;  /* Added shadow transition */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .drink-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.12);  /* Enhanced shadow on hover */
+        }
+
+        .drink-image {
+            width: 120px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .drink-name {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .drink-description {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .drink-price {
+            color: #666;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .drinks-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .drinks-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="menu.html" class="back-btn">←</a>
+        <div class="category-title">Hot Milk</div>
+    </div>
+
+    <div class="drinks-grid">
+        <div class="drink-item" onclick="goToCustomization('Hot Chocolate', 65, 'picture/HotChocolate.png', 'Rich hot chocolate with whipped cream')">
+            <img src="picture/HotChocolate.jpg" alt="Hot Chocolate" class="drink-image">
+            <div class="drink-name">Hot Chocolate</div>
+            <div class="drink-description">Rich hot chocolate with whipped cream</div>
+            <div class="drink-price">฿65</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Vanilla Milk', 60, 'picture/VanillaMilk.png', 'Creamy vanilla flavored milk')">
+            <img src="picture/VanillaMilk.jpg" alt="Vanilla Milk" class="drink-image">
+            <div class="drink-name">Vanilla Milk</div>
+            <div class="drink-description">Creamy vanilla flavored milk</div>
+            <div class="drink-price">฿60</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Strawberry Milk', 70, 'picture/StrawberryMilk.png', 'Delicious strawberry flavored milk')">
+            <img src="picture/StrawberryMilk.png" alt="Strawberry Milk" class="drink-image">
+            <div class="drink-name">Strawberry Milk</div>
+            <div class="drink-description">Delicious strawberry flavored milk</div>
+            <div class="drink-price">฿70</div>
+        </div>
+
+        <!-- New Hot Drink Items -->
+        <div class="drink-item" onclick="goToCustomization('Caramel Milk', 75, 'picture/CaramelMilk.png', 'Creamy caramel flavored milk')">
+            <img src="picture/CaramelMilk.jpg" alt="Caramel Milk" class="drink-image">
+            <div class="drink-name">Caramel Milk</div>
+            <div class="drink-description">Creamy caramel flavored milk</div>
+            <div class="drink-price">฿75</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Chocolate Milk', 70, 'picture/ChocolateMilk.png', 'Rich chocolate flavored milk')">
+            <img src="picture/ChocolateMilk.jpg" alt="Chocolate Milk" class="drink-image">
+            <div class="drink-name">Chocolate Milk</div>
+            <div class="drink-description">Rich chocolate flavored milk</div>
+            <div class="drink-price">฿70</div>
+        </div>
+
+        <div class="drink-item" onclick="goToCustomization('Honey Milk', 65, 'picture/HoneyMilk.png', 'Sweet honey flavored milk')">
+            <img src="picture/HoneyMilk.jpg" alt="Honey Milk" class="drink-image">
+            <div class="drink-name">Honey Milk</div>
+            <div class="drink-description">Sweet honey flavored milk</div>
+            <div class="drink-price">฿65</div>
+        </div>
+    </div>
+
+    <script>
+        function goToCustomization(name, price, image, description) {
+            const params = new URLSearchParams({
+                name: name,
+                price: price,
+                image: image,
+                description: description
+            });
+            window.location.href = `drink-customization.html?${params.toString()}`;
+        }
+    </script>
+</body>
+</html>

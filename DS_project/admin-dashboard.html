@@ -207,6 +207,79 @@
             background: #4169E1;
             color: white;
         }
+
+         /* Menu Content Styles */
+         .menu-container {
+            padding: 50px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-icon {
+            width: 100px;
+            height: 100px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .menu-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .menu-button {
+            padding: 8px 20px;
+            background-color: #4169E1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #3157d1;
+        }
+
+        .edit-btn {
+            background: #FFB800;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -220,12 +293,6 @@
     <!-- Item Tab Content -->
     <div id="itemContent" class="tab-content active">
         <div class="admin-profile"></div>
-        
-        <div class="category-filters">
-            <button class="category-btn active">Hot</button>
-            <button class="category-btn">Iced</button>
-            <button class="category-btn">Smoothie</button>
-        </div>
 
         <div class="search-bar">
             <input type="text" class="search-input" placeholder="Search">
@@ -237,21 +304,56 @@
         </div>
 
         <div class="items-grid">
-            <div class="item-card">
-                <div class="item-settings">⚙️</div>
-                <h3>item</h3>
-                <p>detail</p>
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <img src="picture/simple-hot-coffee-takeaway-icon-logo-animated-cartoon-isolated-on-white-background-vector.jpg" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h3 class="menu-title">HOT COFFEE</h3>
+                <a href="HOT_COFFEE.html"><button class="menu-button">Select</button></a>
+                <button class="edit-btn" data-name="HOT COFFEE" data-image="picture/simple-hot-coffee-takeaway-icon-logo-animated-cartoon-isolated-on-white-background-vector.jpg">Edit</button>
             </div>
-            <div class="item-card">
-                <div class="item-settings">⚙️</div>
-                <h3>item</h3>
-                <p>detail</p>
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <img src="picture/OIP (2).jpg" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h3 class="menu-title">ICE COFFEE</h3>
+                <a href="HOT_COFFEE.html"><button class="menu-button">Select</button></a>
+                <button class="edit-btn" data-name="ICE COFFEE" data-image="picture/OIP (2).jpg">Edit</button>
             </div>
-            <div class="item-card">
-                <div class="item-settings">⚙️</div>
-                <h3>item</h3>
-                <p>detail</p>
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <img src="picture/soda-paper-cup-cartoon-icon-disposable-paper-cup-with-soda-and-straw-food-icon-concept-illustration-suitable-for-icon-logo-sticker-clipart-free-vector.jpg" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h3 class="menu-title">HOT MILK</h3>
+                <a href="HOT_COFFEE.html"><button class="menu-button">Select</button></a>
+                <button class="edit-btn" data-name="HOT MILK" data-image="picture/soda-paper-cup-cartoon-icon-disposable-paper-cup-with-soda-and-straw-food-icon-concept-illustration-suitable-for-icon-logo-sticker-clipart-free-vector.jpg">Edit</button>
             </div>
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <img src="picture/OIP (3).jpg" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h3 class="menu-title">ICE MILK</h3>
+                <a href="HOT_COFFEE.html"><button class="menu-button">Select</button></a>
+                <button class="edit-btn" data-name="ICE MILK" data-image="picture/OIP (3).jpg">Edit</button>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <img src="picture/OIP (4).jpg" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h3 class="menu-title">SMOOTHIE</h3>
+                <a href="HOT_COFFEE.html"><button class="menu-button">Select</button></a>
+                <button class="edit-btn" data-name="SMOOTHIE" data-image="picture/OIP (4).jpg">Edit</button>
+            </div>
+     
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <img src="picture/OIP (5).jpg" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h3 class="menu-title">SODA</h3>
+                <a href="HOT_COFFEE.html"><button class="menu-button">Select</button></a>
+                <button class="edit-btn" data-name="SODA" data-image="picture/OIP (5).jpg">Edit</button>
+            </div>
+            <!-- Add more items as needed -->
         </div>
     </div>
 
@@ -292,6 +394,17 @@
         <button class="nav-btn logout-btn" onclick="handleLogout()">Logout</button>
     </div>
 
+    <!-- Edit Modal -->
+    <div id="editModal" style="display:none;">
+        <div>
+            <h2>Edit Drink</h2>
+            <input type="text" id="editName" placeholder="Drink Name">
+            <input type="text" id="editImage" placeholder="Image URL">
+            <button id="saveEdit">Save</button>
+            <button id="closeModal">Close</button>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Tab switching functionality
@@ -318,6 +431,38 @@
                     categoryBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                 });
+            });
+
+            // Edit button functionality
+            const editBtns = document.querySelectorAll('.edit-btn');
+            const editModal = document.getElementById('editModal');
+            const editNameInput = document.getElementById('editName');
+            const editImageInput = document.getElementById('editImage');
+            let currentItem;
+
+            editBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentItem = btn.parentElement;
+                    editNameInput.value = btn.getAttribute('data-name');
+                    editImageInput.value = btn.getAttribute('data-image');
+                    editModal.style.display = 'block';
+                });
+            });
+
+            document.getElementById('saveEdit').addEventListener('click', () => {
+                const newName = editNameInput.value;
+                const newImage = editImageInput.value;
+                currentItem.querySelector('.menu-title').textContent = newName;
+                currentItem.querySelector('.menu-icon img').src = newImage;
+
+                // Logic to update menu.html can be added here
+                // For example, you could send an AJAX request to update the server-side data
+
+                editModal.style.display = 'none';
+            });
+
+            document.getElementById('closeModal').addEventListener('click', () => {
+                editModal.style.display = 'none';
             });
         });
 
