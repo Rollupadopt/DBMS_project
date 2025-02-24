@@ -180,7 +180,7 @@
             </div>
         </div>
 
-        <button class="add-to-cart" onclick="window.location.href='payment.html'">Add to Cart</button>
+        <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
     </div>
 
     <script>
@@ -192,6 +192,26 @@
             }
             // Add selected class to clicked element
             element.classList.add('selected');
+        }
+        function addToCart() {
+            // Get all selected options using the correct selectors
+            const type = document.querySelector('.options-grid .selected').textContent;
+            const size = document.querySelector('.customization-section:nth-child(3) .selected').textContent;
+            const shot = document.querySelector('.customization-section:nth-child(4) .selected').textContent;
+            const sweetness = document.querySelector('.sweetness-grid .selected').textContent;
+
+            // Create URL parameters
+            const params = new URLSearchParams({
+                drink: 'Caramel-Macchiato',
+                type: type,
+                size: size,
+                shot: shot,
+                sweetness: sweetness
+            });
+
+            // Redirect to payment page with parameters
+            window.location.href = `Caramel-Macchiato_payment.html?${params.toString()}`;
+
         }
     </script>
 </body>
