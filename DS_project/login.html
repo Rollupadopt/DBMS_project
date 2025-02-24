@@ -97,7 +97,6 @@
             border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
-            transition: background 0.3s;
         }
 
         .login-button:hover {
@@ -148,6 +147,7 @@
 
         <form onsubmit="return validateForm()">
             <div class="form-group">
+
                 <label class="form-label">Username</label>
                 <input type="text" class="form-input" placeholder="Enter your username" required>
 
@@ -156,9 +156,6 @@
             <button type="submit" class="login-button">Login</button>
         </form>
 
-        <div class="register-link">
-            Don't have an account? <a href="register.html">Sign up</a>
-        </div>
     </div>
 
     <script>
