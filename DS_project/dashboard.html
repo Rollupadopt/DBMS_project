@@ -612,6 +612,40 @@
         .menu-button:hover {
             background-color: #3157d1; /* Darker blue on hover */
         }
+
+        /* เพิ่มสไตล์สำหรับหัวข้อ */
+        .vm-list h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* สไตล์สำหรับตาราง */
+        .vm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .vm-table th, .vm-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .vm-table th {
+            background-color: #f5f6fa;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .vm-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .vm-table tr:hover {
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
@@ -684,6 +718,11 @@
                     <div class="profile-info">
                         <div class="info-label">Email</div>
                         <div class="info-value" id="view-email">john.doe@email.com</div>
+                    </div>
+
+                    <div class="profile-info">
+                        <div class="info-label">User ID</div>
+                        <div class="info-value" id="view-userid">CS123456</div>
                     </div>
 
                     <button class="edit-button" onclick="toggleEditMode(true)">Edit Profile</button>
@@ -1026,7 +1065,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            const loginBtn = document.querySelector('.Login');  // Assuming your login button has 'Login' class
+            const loginBtn = document.querySelector('button[type="submit"]');  // Assuming your login button is of type submit
             const loginContainer = document.querySelector('.login-container');
             const overlay = document.createElement('div');
             overlay.className = 'overlay';
@@ -1034,8 +1073,20 @@
 
             loginBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                loginContainer.style.display = 'block';
-                overlay.style.display = 'block';
+                const username = document.getElementById('username').value; // Get the username input value
+
+                // Check if the username starts with 'CS'
+                if (username.startsWith('CS')) {
+                    // Set the User ID in the profile view
+                    document.getElementById('view-userid').textContent = username; // Show User ID
+                } else {
+                    alert('UserID ต้องขึ้นต้นด้วย CS เท่านั้น');
+                    return; // Stop the login process if the User ID is invalid
+                }
+
+                // Show the main dashboard and hide the login container
+                loginContainer.style.display = 'none';
+                overlay.style.display = 'none';
             });
 
             // Close when clicking outside
@@ -1044,6 +1095,16 @@
                 overlay.style.display = 'none';
             });
         });
+
+        const socket = new WebSocket('ws://localhost:8080');
+
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            if (data.type === 'updateIncome') {
+                const { machineId, newIncome } = data;
+                document.getElementById(`currentIncome_${machineId}`).textContent = `$${newIncome}`;
+            }
+        };
     </script>
 </body>
 </html> 

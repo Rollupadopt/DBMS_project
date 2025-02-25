@@ -87,7 +87,7 @@
                             <!-- Example Row -->
                             <tr>
                                 <td class="py-2 px-4 border-b">VM001</td>
-                                <td class="py-2 px-4 border-b">User123</td>
+                                <td class="py-2 px-4 border-b">CS123456</td>
                                 <td class="py-2 px-4 border-b" id="currentIncome_VM001">$100</td>
                                 <td class="py-2 px-4 border-b">
                                     <input type="text" placeholder="New Income" class="border rounded-lg p-1" id="newIncomeInput_VM001">
@@ -311,15 +311,22 @@
         window.onload = populateMenuCategories;
 
         function updateIncome(machineId) {
-            // Get the new income value from the input field
             const newIncomeInput = document.getElementById(`newIncomeInput_${machineId}`);
             const newIncomeValue = newIncomeInput.value;
 
             // Update the displayed current income
             const currentIncomeElement = document.getElementById(`currentIncome_${machineId}`);
-            currentIncomeElement.textContent = `$${newIncomeValue}`; // Update the displayed income
+            currentIncomeElement.textContent = `$${newIncomeValue}`;
 
-            // Optionally, clear the input field after saving
+            // Send the update to WebSocket server
+            const message = JSON.stringify({
+                type: 'updateIncome',
+                machineId: machineId,
+                newIncome: newIncomeValue
+            });
+            socket.send(message);
+
+            // Clear the input field after saving
             newIncomeInput.value = '';
         }
     </script>
