@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Vending Machine Rentals</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Add this CSS to your existing styles */
+        .price-column {
+            width: 100px; /* Set a fixed width for the price column */
+            text-align: center; /* Center the text in the price column */
+        }
+
+        .action-column {
+            width: 150px; /* Set a fixed width for the action column */
+            text-align: center; /* Center the text in the action column */
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="flex">
@@ -16,16 +28,7 @@
             <nav class="mt-5">
                 <ul>
                     <li class="hover:bg-gray-200">
-                        <a href="#dashboard" class="block p-4 text-gray-700">Dashboard Overview</a>
-                    </li>
-                    <li class="hover:bg-gray-200">
-                        <a href="#manage-menu" class="block p-4 text-gray-700">Manage Menus</a>
-                    </li>
-                    <li class="hover:bg-gray-200">
-                        <a href="#update-income" class="block p-4 text-gray-700">Update Daily Income</a>
-                    </li>
-                    <li class="hover:bg-gray-200">
-                        <a href="#" class="block p-4 text-red-600">Logout</a>
+                        <a href="index.html" class="block p-4 text-red-600">Logout</a>
                     </li>
                 </ul>
             </nav>
@@ -57,33 +60,9 @@
                 <h2 class="text-2xl font-semibold mb-5">Manage Menus</h2>
                 <button class="bg-blue-500 text-white px-4 py-2 rounded shadow" onclick="document.getElementById('addMenuModal').style.display='block'">Add New Menu</button>
                 <div class="overflow-x-auto mt-5">
-                    <table class="min-w-full bg-white rounded-lg shadow">
-                        <thead>
-                            <tr>
-                                <th class="py-2 px-4 border-b">ID</th>
-                                <th class="py-2 px-4 border-b">Name</th>
-                                <th class="py-2 px-4 border-b">Price</th>
-                                <th class="py-2 px-4 border-b">Category</th>
-                                <th class="py-2 px-4 border-b">Stock</th>
-                                <th class="py-2 px-4 border-b">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Example Row -->
-                            <tr>
-                                <td class="py-2 px-4 border-b">1</td>
-                                <td class="py-2 px-4 border-b">Hot Coffee</td>
-                                <td class="py-2 px-4 border-b">$2.50</td>
-                                <td class="py-2 px-4 border-b">Beverage</td>
-                                <td class="py-2 px-4 border-b">50</td>
-                                <td class="py-2 px-4 border-b">
-                                    <button class="text-blue-500" onclick="editMenuItem(1)">Edit</button>
-                                    <button class="text-red-500" onclick="deleteMenuItem(1)">Delete</button>
-                                </td>
-                            </tr>
-                            <!-- More rows as needed -->
-                        </tbody>
-                    </table>
+                    <div id="menuCategories">
+                        <!-- Categories will be populated here -->
+                    </div>
                 </div>
             </section>
 
@@ -91,7 +70,7 @@
             <section id="update-income">
                 <h2 class="text-2xl font-semibold mb-5">Update Daily Income</h2>
                 <div class="flex items-center mb-5">
-                    <input type="text" placeholder="Search by User ID" class="border rounded-lg p-2 mr-2">
+                    <input type="text" id="userIdInput" placeholder="Search by User ID" class="border rounded-lg p-2 mr-2">
                     <button class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
                 </div>
                 <div class="overflow-x-auto">
@@ -109,10 +88,10 @@
                             <tr>
                                 <td class="py-2 px-4 border-b">VM001</td>
                                 <td class="py-2 px-4 border-b">User123</td>
-                                <td class="py-2 px-4 border-b">$100</td>
+                                <td class="py-2 px-4 border-b" id="currentIncome_VM001">$100</td>
                                 <td class="py-2 px-4 border-b">
-                                    <input type="text" placeholder="New Income" class="border rounded-lg p-1">
-                                    <button class="bg-green-500 text-white px-2 py-1 rounded">Save</button>
+                                    <input type="text" placeholder="New Income" class="border rounded-lg p-1" id="newIncomeInput_VM001">
+                                    <button class="bg-green-500 text-white px-2 py-1 rounded" onclick="updateIncome('VM001')">Save</button>
                                 </td>
                             </tr>
                             <!-- More rows as needed -->
@@ -127,30 +106,221 @@
     <div id="addMenuModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" style="display:none;">
         <div class="bg-white rounded-lg p-5 w-1/3">
             <h2 class="text-xl font-bold mb-4">Add New Menu Item</h2>
-            <form>
+            <form id="addMenuForm">
                 <input type="text" placeholder="Name" class="border rounded-lg p-2 mb-2 w-full" required>
                 <input type="number" placeholder="Price" class="border rounded-lg p-2 mb-2 w-full" required>
-                <input type="text" placeholder="Category" class="border rounded-lg p-2 mb-2 w-full" required>
-                <input type="number" placeholder="Stock" class="border rounded-lg p-2 mb-2 w-full" required>
-                <input type="file" class="border rounded-lg p-2 mb-2 w-full" required>
+                <select id="categorySelect" class="border rounded-lg p-2 mb-2 w-full" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Hot Coffee">Hot Coffee</option>
+                    <option value="Ice Coffee">Ice Coffee</option>
+                    <option value="Hot Milk">Hot Milk</option>
+                    <option value="Ice Milk">Ice Milk</option>
+                    <option value="Smoothies">Smoothies</option>
+                    <option value="Soda">Soda</option>
+                </select>
                 <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="addMenuItem()">Add Item</button>
                 <button type="button" class="bg-red-500 text-white px-4 py-2 rounded" onclick="document.getElementById('addMenuModal').style.display='none'">Close</button>
             </form>
         </div>
     </div>
 
+    <!-- Edit Menu Modal -->
+    <div id="editMenuModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" style="display:none;">
+        <div class="bg-white rounded-lg p-5 w-1/3">
+            <h2 class="text-xl font-bold mb-4">Edit Menu Item</h2>
+            <form id="editMenuForm">
+                <input type="text" id="editName" placeholder="Name" class="border rounded-lg p-2 mb-2 w-full" required>
+                <input type="number" id="editPrice" placeholder="Price" class="border rounded-lg p-2 mb-2 w-full" required>
+                <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="saveEdit()">Save</button>
+                <button type="button" class="bg-red-500 text-white px-4 py-2 rounded" onclick="document.getElementById('editMenuModal').style.display='none'">Close</button>
+            </form>
+        </div>
+    </div>
+
     <script>
+        // Define menu categories and their corresponding items
+        const menuCategories = {
+            "Hot Coffee": [
+                { name: "Espresso", price: 60 },
+                { name: "Americano", price: 65 },
+                { name: "Latte", price: 70 },
+                { name: "Cappuccino", price: 70 },
+                { name: "Mocha", price: 75 },
+                { name: "Caramel Macchiato", price: 80 }
+            ],
+            "Ice Coffee": [
+                { name: "Iced Espresso", price: 60 },
+                { name: "Iced Americano", price: 65 },
+                { name: "Iced Latte", price: 70 },
+                { name: "Iced Cappuccino", price: 70 },
+                { name: "Iced Mocha", price: 75 },
+                { name: "Iced Caramel Macchiato", price: 80 }
+            ],
+            "Hot Milk": [
+                { name: "Hot Chocolate", price: 65 },
+                { name: "Vanilla Milk", price: 60 },
+                { name: "Strawberry Milk", price: 70 },
+                { name: "Caramel Milk", price: 75 },
+                { name: "Chocolate Milk", price: 70 },
+                { name: "Honey Milk", price: 65 }
+            ],
+            "Ice Milk": [
+                { name: "Iced Chocolate", price: 65 },
+                { name: "Iced Vanilla Ice Milk", price: 60 },
+                { name: "Iced Strawberry Ice Milk", price: 70 },
+                { name: "Iced Caramel Milk", price: 75 },
+                { name: "Iced Chocolate Milk", price: 70 },
+                { name: "Iced Honey Milk", price: 65 }
+            ],
+            "Smoothies": [
+                { name: "Mango Smoothie", price: 70 },
+                { name: "Berry Smoothie", price: 75 },
+                { name: "Avocado Smoothie", price: 65 },
+                { name: "Banana Smoothie", price: 70 },
+                { name: "Green Smoothie", price: 75 },
+                { name: "Strawberry Smoothie", price: 65 }
+            ],
+            "Soda": [
+                { name: "Cola", price: 50 },
+                { name: "Lemonade", price: 45 },
+                { name: "Orange Soda", price: 55 },
+                { name: "Grape Soda", price: 60 },
+                { name: "Root Beer", price: 65 },
+                { name: "Cream Soda", price: 70 }
+            ]
+        };
+
         function addMenuItem() {
-            // Logic to add menu item
+            const name = document.querySelector('#addMenuForm input[type="text"]').value;
+            const price = document.querySelector('#addMenuForm input[type="number"]').value;
+            const category = document.getElementById('categorySelect').value;
+
+            // Check if the item already exists in the selected category
+            const existingItem = menuCategories[category].find(item => item.name === name);
+            if (existingItem) {
+                alert("An item with this name already exists in this category.");
+                return; // Exit the function if the item already exists
+            }
+
+            // Add the new item to the selected category
+            menuCategories[category].push({ name: name, price: parseInt(price) });
+
+            // Close the modal
             document.getElementById('addMenuModal').style.display = 'none';
+
+            // Refresh the menu display
+            populateMenuCategories();
         }
 
-        function editMenuItem(id) {
-            // Logic to edit menu item
+        function editMenuItem(name, category) {
+            const item = menuCategories[category].find(item => item.name === name);
+            if (item) {
+                document.getElementById('editName').value = item.name;
+                document.getElementById('editPrice').value = item.price;
+                document.getElementById('editMenuModal').style.display = 'block';
+                // Store the category and original name in the form for later use
+                document.getElementById('editMenuForm').setAttribute('data-category', category);
+                document.getElementById('editName').setAttribute('data-original-name', item.name);
+            }
         }
 
-        function deleteMenuItem(id) {
-            // Logic to delete menu item
+        function deleteMenuItem(name, category) {
+            // Find the index of the item to delete
+            const itemIndex = menuCategories[category].findIndex(item => item.name === name);
+            
+            if (itemIndex !== -1) {
+                // Remove the item from the category
+                menuCategories[category].splice(itemIndex, 1);
+                
+                // Refresh the menu display
+                populateMenuCategories();
+            } else {
+                alert("Item not found.");
+            }
+        }
+
+        function saveEdit() {
+            const newName = document.getElementById('editName').value;
+            const newPrice = document.getElementById('editPrice').value;
+            const category = document.getElementById('editMenuForm').getAttribute('data-category');
+
+            // Find the index of the item to update
+            const itemIndex = menuCategories[category].findIndex(item => item.name === newName);
+
+            // If the item with the new name already exists, you may want to handle it
+            if (itemIndex !== -1 && menuCategories[category][itemIndex].name !== newName) {
+                alert("An item with this name already exists. Please choose a different name.");
+                return; // Exit the function if the name already exists
+            }
+
+            // Update the item in the menuCategories
+            const originalItemIndex = menuCategories[category].findIndex(item => item.name === document.getElementById('editName').getAttribute('data-original-name'));
+            if (originalItemIndex !== -1) {
+                menuCategories[category][originalItemIndex].name = newName; // Update the name
+                menuCategories[category][originalItemIndex].price = parseInt(newPrice); // Update the price
+            } else {
+                // If the item doesn't exist, you may want to add it as a new item
+                menuCategories[category].push({ name: newName, price: parseInt(newPrice) });
+            }
+
+            // Close the modal
+            document.getElementById('editMenuModal').style.display = 'none';
+
+            // Refresh the menu display
+            populateMenuCategories();
+        }
+
+        // Function to populate the menu categories
+        function populateMenuCategories() {
+            const menuCategoriesDiv = document.getElementById('menuCategories');
+            menuCategoriesDiv.innerHTML = ''; // Clear existing items
+
+            for (const category in menuCategories) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = "mb-5";
+                categoryDiv.innerHTML = `<h3 class="text-xl font-semibold">${category}</h3>`;
+                const table = document.createElement('table');
+                table.className = "min-w-full bg-white rounded-lg shadow mt-2";
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b">Name</th>
+                            <th class="py-2 px-4 border-b price-column">Price</th>
+                            <th class="py-2 px-4 border-b action-column">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${menuCategories[category].map(item => `
+                            <tr>
+                                <td class="py-2 px-4 border-b">${item.name}</td>
+                                <td class="py-2 px-4 border-b price-column">฿${item.price}</td>
+                                <td class="py-2 px-4 border-b action-column">
+                                    <button class="text-blue-500" onclick="editMenuItem('${item.name}', '${category}')">Edit</button>
+                                    <button class="text-red-500" onclick="deleteMenuItem('${item.name}', '${category}')">Delete</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                `;
+                categoryDiv.appendChild(table);
+                menuCategoriesDiv.appendChild(categoryDiv);
+            }
+        }
+
+        // Call the function to populate the categories on page load
+        window.onload = populateMenuCategories;
+
+        function updateIncome(machineId) {
+            // Get the new income value from the input field
+            const newIncomeInput = document.getElementById(`newIncomeInput_${machineId}`);
+            const newIncomeValue = newIncomeInput.value;
+
+            // Update the displayed current income
+            const currentIncomeElement = document.getElementById(`currentIncome_${machineId}`);
+            currentIncomeElement.textContent = `$${newIncomeValue}`; // Update the displayed income
+
+            // Optionally, clear the input field after saving
+            newIncomeInput.value = '';
         }
     </script>
 </body>
